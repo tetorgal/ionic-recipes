@@ -11,7 +11,7 @@ import { AddUpdateRecipeComponent } from './components/add-update-recipe/add-upd
 
 @NgModule({
   declarations: [
-    HeaderComponent, LogoComponent, CustomInputComponent,AddUpdateRecipeComponent
+    HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent
   ],
   exports: [
     HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent
