@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
@@ -10,7 +11,6 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class AuthPage implements OnInit {
   firebaseSvc = inject(FirebaseService)
-
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
