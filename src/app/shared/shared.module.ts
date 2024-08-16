@@ -5,15 +5,16 @@ import { LogoComponent } from './components/logo/logo.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
+import { AddUpdateRecipeComponent } from './components/add-update-recipe/add-update-recipe.component';
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent, LogoComponent, CustomInputComponent
+    HeaderComponent, LogoComponent, CustomInputComponent,AddUpdateRecipeComponent
   ],
   exports: [
-    HeaderComponent, LogoComponent, CustomInputComponent
+    HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent
   ],
   imports: [
     CommonModule,
