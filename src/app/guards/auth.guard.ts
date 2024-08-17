@@ -5,11 +5,10 @@ import { Observable } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 import { UtilsService } from '../services/utils.service';
 
-@Injectable
-({
+@Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate  {
+export class AuthGuard implements CanActivate {
   
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
@@ -17,22 +16,16 @@ export class AuthGuard implements CanActivate  {
   canActivate(
     route: ActivatedRouteSnapshot, 
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-   
-      let user = localStorage.getItem('user');
-
-      return new Promise((resolve) => {
-
-        this.firebaseSvc.getAuth().onAuthStateChanged((auth) => {
-
-          if(auth){
-            if(user) resolve(true);
-          }
-          else{
-           this.utilsSvc.routerLink('/auth');
-           resolve(false); 
-          }
-        })
-
+    
+    return new Promise((resolve) => {
+      this.firebaseSvc.getAuth().onAuthStateChanged((auth) => {
+        if (auth) {
+          resolve(true); // User is authenticated
+        } else {
+          this.utilsSvc.routerLink('/auth'); // Redirect to auth page
+          resolve(false); // User is not authenticated
+        }
       });
+    });
   }
-};
+}
