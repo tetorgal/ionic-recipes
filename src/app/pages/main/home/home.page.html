@@ -1,7 +1,37 @@
 <app-header title="Inicio"></app-header>
+<ion-content class="container mx-auto">
+  <section class="w-full py-8">
+
+
+    <app-custom-input icon="ion-search" autocomplete="" label="Buscar..."></app-custom-input>
+  </section>
+
+  <div class="grid grid-cols-2 gap-2">
+    <span class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">Category 1</span>
+    <span class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">Category 2</span>
+    <span class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Category 3</span>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4">
+    <div class="bg-white p-4 rounded shadow">
+      <img src="assets/logo-homechef.svg" alt="Image 1" class="w-full h-32 object-cover mb-2" />
+      <h3 class="font-bold text-md">Titulo</h3>
+      <p class="font-normal text-slate-400">Descripcion blah blah</p>
+      <button class="mt-2 bg-green-400 text-white px-4 rounded">Ver más</button>
+    </div>
+    <!-- más tarjetas -->
+    <div class="bg-white p-4 rounded shadow">
+      <img src="assets/logo-homechef.svg" alt="Image 1" class="w-full h-32 object-cover mb-2" />
+      <h3 class="font-bold text-md">Titulo</h3>
+      <p class="font-normal text-slate-400">Descripcion blah blah</p>
+      <button class="mt-2 bg-green-400 text-white px-4 rounded">Ver más</button>
+    </div>
+  </div>
+
+</ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="addUpdateProduct()">
-    <ion-icon name="add"></ion-icon>
+  <ion-fab-button (click)="addUpdateProduct()" color="verde">
+    <ion-icon name="add" ></ion-icon>
   </ion-fab-button>
 </ion-fab>
