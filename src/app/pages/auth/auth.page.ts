@@ -40,7 +40,7 @@ async submit() {
           this.utilsSvc.presentToast({
             message: error.message,
             duration: 2500,
-            color: 'primary',
+            color: 'tertiary',
             position: 'middle',
             icon: 'alert-circle-outline'
           })
@@ -72,7 +72,7 @@ async submit() {
         this.utilsSvc.presentToast({
           message: `Te damos la Bienvenida ${user.name}`,
           duration: 1500,
-          color: 'primary',
+          color: 'tertiary',
           position: 'middle',
           icon: 'person-circle-outline'
         })
@@ -83,7 +83,7 @@ async submit() {
        this.utilsSvc.presentToast({
          message: error.message,
          duration: 2500,
-         color: 'primary',
+         color: 'tertiary',
          position: 'middle',
          icon: 'alert-circle-outline'
        })
