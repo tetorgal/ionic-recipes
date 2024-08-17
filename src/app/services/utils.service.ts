@@ -10,6 +10,7 @@ export class UtilsService {
 
   loadingCtrl = inject(LoadingController);
   toastCtrl = inject(ToastController);
+  
   modalCtrl = inject(ModalController);
 
   router = inject(Router)
@@ -24,6 +25,24 @@ export class UtilsService {
     const toast = await this.toastCtrl.create(opts);
     toast.present();
   }
+
+
+  //ENRUTA CUALQUIER PAG DISPONIBLE
+
+  routerLink(url: string){
+    return this.router.navigateByUrl(url);
+  }
+
+  //GUARDAR ELEMENTO EN LOCALSTOREGE
+  saveInLocalStorage(key:string, value: any){
+    return localStorage.setItem(key, JSON.stringify(value))
+  }
+
+  //OBTENER ELEMENTO DESDE LOCALSTOREGE
+  getFromLocalStorage(key: string){
+    return JSON.parse(localStorage.getItem(key))
+  }
+
 
   // Modal
   async presentModal(opts: ModalOptions) {
