@@ -2,6 +2,17 @@
   <app-header title="Inicio"></app-header>
   <ion-content [fullscreen]="true" class="ion-padding">
 
+
+<ion-button (click)="signOut()">
+  Cerrar Sesión
+</ion-button>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="addUpdateProduct()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
     <!-- Search Bar -->
     <div class="w-full py-4">
       <ion-searchbar placeholder="Search for recipes..." class="rounded-md"></ion-searchbar>
@@ -60,3 +71,4 @@
 
   </ion-content>
 </ion-app>
+
