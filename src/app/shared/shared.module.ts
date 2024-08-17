@@ -6,6 +6,7 @@ import { AddUpdateRecipeComponent } from './components/add-update-recipe/add-upd
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { HomePage } from '../pages/main/home/home.page';
 
 
 

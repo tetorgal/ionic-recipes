@@ -9,6 +9,10 @@ export class MainPage implements OnInit {
 
   constructor() { }
 
+  pages = [
+    { title: 'Inicio', url: 'home', icon: 'home-outline' }
+  ]
+
   ngOnInit() {
   }
 
