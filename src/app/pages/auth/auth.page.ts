@@ -19,12 +19,16 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {
   }
-  submit() {
-    if (this.form.valid) {
-      this.firebaseSvc.signIn(this.form.value as User).then(res => {
-        console.log(res)
-      })
-    }
+
+  submit(){
+    console.log(this.form.value);
   }
+  // submit() {
+  //   if (this.form.valid) {
+  //     this.firebaseSvc.signIn(this.form.value as User).then(res => {
+  //       console.log(res)
+  //     })
+  //   }
+  // }
 
 }
