@@ -15,7 +15,11 @@ const routes: Routes = [
       // Resto de rutas para paginas
 
     ]
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
+
 
 
 ];
