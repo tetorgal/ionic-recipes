@@ -1,12 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  LoadingController,
-  ModalController,
-  ModalOptions,
-  ToastController,
-  ToastOptions,
-} from '@ionic/angular';
+
+import { LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -14,8 +10,10 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   providedIn: 'root',
 })
 export class UtilsService {
+
   loadingCtrl = inject(LoadingController);
   toastCtrl = inject(ToastController);
+  
   modalCtrl = inject(ModalController);
   router = inject(Router);
 
@@ -35,16 +33,31 @@ export class UtilsService {
     return this.loadingCtrl.create({ spinner: 'crescent' });
   }
 
-  // Toast
-  async presentToast(opts?: ToastOptions) {
-    const toast = await this.toastCtrl.create(opts);
-    toast.present();
-  }
+
+
 
   //Obtener elemento del localstorage
   getFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
+
+
+  //ENRUTA CUALQUIER PAG DISPONIBLE
+
+  routerLink(url: string){
+    return this.router.navigateByUrl(url);
+  }
+
+  //GUARDAR ELEMENTO EN LOCALSTOREGE
+  saveInLocalStorage(key:string, value: any){
+    return localStorage.setItem(key, JSON.stringify(value))
+  }
+
+  //OBTENER ELEMENTO DESDE LOCALSTOREGE
+  getFromLocalStorage(key: string){
+    return JSON.parse(localStorage.getItem(key))
+  }
+
 
   // Modal
   async presentModal(opts: ModalOptions) {

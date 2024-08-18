@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateRecipeComponent } from 'src/app/shared/components/add-update-recipe/add-update-recipe.component';
 
@@ -9,16 +10,26 @@ import { AddUpdateRecipeComponent } from 'src/app/shared/components/add-update-r
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  // firebaseSvc = inject(FirebaseService);
-  utilSvc = inject(UtilsService);
 
   constructor() {}
 
-  ngOnInit() {}
+  firebaseSvc = inject(FirebaseService);
+  utilSvc = inject(UtilsService)
+  
+
+  ngOnInit() {
+
 
   addUpdateProduct() {
     this.utilSvc.presentModal({
       component: AddUpdateRecipeComponent,
     });
   }
+
+  //CERRAR SESIÓN
+  signOut(){
+    this.firebaseSvc.signOut();
+  }
+
+
 }

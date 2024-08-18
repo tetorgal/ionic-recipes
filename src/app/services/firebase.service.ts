@@ -26,6 +26,7 @@ import { UtilsService } from './utils.service';
 export class FirebaseService {
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
+
   storage = inject(AngularFireStorage);
   utilsSvc = inject(UtilsService);
   constructor() {}
@@ -34,11 +35,13 @@ export class FirebaseService {
     return signInWithEmailAndPassword(getAuth(), user.email, user.password);
   }
 
+
   // BASE DE DATOS
   //Setear un documento
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);
   }
+
 
   // Obtener un documento
   async getDocument(path: string) {
@@ -59,5 +62,41 @@ export class FirebaseService {
         return getDownloadURL(ref(getStorage(), path));
       }
     );
+
+  //Auntentificación
+
+  getAuth(){
+    return getAuth();
   }
+
+  //Acceder
+  signIn(user: User) {
+    return signInWithEmailAndPassword(getAuth(), user.email, user.password)
+
+  }
+
+  //Crear Usuario
+  signUp(user: User) {
+    return createUserWithEmailAndPassword(getAuth(), user.email, user.password)
+  }
+
+  //Actualizar Uuario
+  updateUser(displayName: string) {
+   return updateProfile(getAuth().currentUser, { displayName })
+  }
+
+  //ENVIAR EMAIL PARA RESTABLECER CONTRASEÑA
+
+  sendRecoveryEmailemail(email: string){
+    return sendPasswordResetEmail(getAuth(), email);
+  }
+
+  //CERRAR SESION
+  signOut(){
+    getAuth().signOut();
+    localStorage.removeItem('user');
+    this.utilsSvc.routerLink('/auth');
+  }
+
+
 }
