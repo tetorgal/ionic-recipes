@@ -3,25 +3,22 @@ import { IonicModule } from '@ionic/angular';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateRecipeComponent } from 'src/app/shared/components/add-update-recipe/add-update-recipe.component';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  utilSvc = inject(UtilsService)
-  
+  // firebaseSvc = inject(FirebaseService);
+  utilSvc = inject(UtilsService);
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  addUpdateProduct(){
+  addUpdateProduct() {
     this.utilSvc.presentModal({
-      component: AddUpdateRecipeComponent
-    })
+      component: AddUpdateRecipeComponent,
+    });
   }
-
 }
