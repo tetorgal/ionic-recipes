@@ -24,7 +24,6 @@
       </ion-chip>
     </div>
 
-
     <!-- Trending Recipes (Cards) -->
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <ng-container *ngFor="let recipe of recipes">
@@ -48,9 +47,6 @@
     </section>
 
 
-
-
-
     <!-- Floating Action Button (FAB) -->
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button (click)="addUpdateRecipe()">
@@ -59,6 +55,5 @@
         </div>
       </ion-fab-button>
     </ion-fab>
-
   </ion-content>
 </ion-app>
