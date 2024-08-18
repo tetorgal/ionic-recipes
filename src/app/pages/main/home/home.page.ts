@@ -11,15 +11,15 @@ import { AddUpdateRecipeComponent } from 'src/app/shared/components/add-update-r
 })
 export class HomePage implements OnInit {
 
-  constructor() {}
+  constructor() { }
 
   firebaseSvc = inject(FirebaseService);
   utilSvc = inject(UtilsService)
-  
+
 
   ngOnInit() {
 
-
+  }
   addUpdateProduct() {
     this.utilSvc.presentModal({
       component: AddUpdateRecipeComponent,
@@ -27,9 +27,10 @@ export class HomePage implements OnInit {
   }
 
   //CERRAR SESIÓN
-  signOut(){
+  signOut() {
     this.firebaseSvc.signOut();
   }
+
 
 
 }

@@ -13,7 +13,7 @@ export class UtilsService {
 
   loadingCtrl = inject(LoadingController);
   toastCtrl = inject(ToastController);
-  
+
   modalCtrl = inject(ModalController);
   router = inject(Router);
 
@@ -36,29 +36,27 @@ export class UtilsService {
 
 
 
-  //Obtener elemento del localstorage
-  getFromLocalStorage(key: string) {
-    return JSON.parse(localStorage.getItem(key));
-  }
-
-
   //ENRUTA CUALQUIER PAG DISPONIBLE
 
-  routerLink(url: string){
+  routerLink(url: string) {
     return this.router.navigateByUrl(url);
   }
 
   //GUARDAR ELEMENTO EN LOCALSTOREGE
-  saveInLocalStorage(key:string, value: any){
+  saveInLocalStorage(key: string, value: any) {
     return localStorage.setItem(key, JSON.stringify(value))
   }
 
   //OBTENER ELEMENTO DESDE LOCALSTOREGE
-  getFromLocalStorage(key: string){
+  getFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key))
   }
 
-
+  //Toast 
+  async presentToast(opts?: ToastOptions) {
+    const toast = await this.toastCtrl.create(opts);
+    toast.present();
+  }
   // Modal
   async presentModal(opts: ModalOptions) {
     const modal = await this.modalCtrl.create(opts);
@@ -73,5 +71,5 @@ export class UtilsService {
   dismissModal(data?: any) {
     return this.modalCtrl.dismiss();
   }
-  constructor() {}
+  constructor() { }
 }

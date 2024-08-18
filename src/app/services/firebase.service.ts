@@ -10,7 +10,7 @@ import {
   getFirestore,
   setDoc,
 } from '@angular/fire/firestore';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import {
   getDownloadURL,
   getStorage,
@@ -29,11 +29,8 @@ export class FirebaseService {
 
   storage = inject(AngularFireStorage);
   utilsSvc = inject(UtilsService);
-  constructor() {}
+  constructor() { }
 
-  signIn(user: User) {
-    return signInWithEmailAndPassword(getAuth(), user.email, user.password);
-  }
 
 
   // BASE DE DATOS
@@ -62,10 +59,10 @@ export class FirebaseService {
         return getDownloadURL(ref(getStorage(), path));
       }
     );
-
+  }
   //Auntentificación
 
-  getAuth(){
+  getAuth() {
     return getAuth();
   }
 
@@ -82,21 +79,20 @@ export class FirebaseService {
 
   //Actualizar Uuario
   updateUser(displayName: string) {
-   return updateProfile(getAuth().currentUser, { displayName })
+    return updateProfile(getAuth().currentUser, { displayName })
   }
 
   //ENVIAR EMAIL PARA RESTABLECER CONTRASEÑA
 
-  sendRecoveryEmailemail(email: string){
+  sendRecoveryEmailemail(email: string) {
     return sendPasswordResetEmail(getAuth(), email);
   }
 
   //CERRAR SESION
-  signOut(){
+  signOut() {
     getAuth().signOut();
     localStorage.removeItem('user');
     this.utilsSvc.routerLink('/auth');
   }
-
 
 }
