@@ -1,4 +1,5 @@
 export interface Recipe {
+
   id: string;
   name: string;
   description: string;
@@ -8,3 +9,4 @@ export interface Recipe {
   steps: string;
   image: string;
 }
+

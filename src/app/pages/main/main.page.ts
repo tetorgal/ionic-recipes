@@ -15,10 +15,12 @@ export class MainPage implements OnInit {
   pages = [
     { title: 'Inicio', url: '/main/home', icon: 'home' },
     { title: 'Perfil', url: '/main/profile', icon: 'person' },
+    { title: 'Mis recetas', url: '/main/my-recipes', icon: 'list' },
+
   ];
-  utilSvc = inject(UtilsService);
-  firebaseSvc = inject(FirebaseService);
-  router = inject(Router);
+  utilSvc = inject(UtilsService)
+  firebaseSvc = inject(FirebaseService)
+  router = inject(Router)
   currentPath: string = '';
 
   ngOnInit() {

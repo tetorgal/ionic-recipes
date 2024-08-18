@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
+import { AlertOptions, AlertController, LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
 
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -16,6 +16,7 @@ export class UtilsService {
 
   modalCtrl = inject(ModalController);
   router = inject(Router);
+  alertCtrl = inject(AlertController);
 
   async takePicture(promptLabelHeader: string) {
     return await Camera.getPhoto({
@@ -34,6 +35,11 @@ export class UtilsService {
   }
 
 
+  async presentAlert(opts?: AlertOptions) {
+    const alert = await this.alertCtrl.create(opts);
+
+    await alert.present();
+  }
 
 
   //ENRUTA CUALQUIER PAG DISPONIBLE
