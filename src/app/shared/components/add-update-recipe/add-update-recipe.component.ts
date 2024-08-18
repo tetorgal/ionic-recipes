@@ -52,32 +52,36 @@ export class AddUpdateRecipeComponent implements OnInit {
   }
 
   submit() {
-    if(this.form.value){
-      if(this.recipe) this.updateRecipe();
+    if (this.form.value) {
+      if (this.recipe) this.updateRecipe();
       else this.createRecipe();
     }
 
   }
   async createRecipe() {
     let path = `users/${this.user.uid}/recipes`;
+    let globalPath = `recipes`; // New path for global recipes
     const loading = await this.utilsSvc.loading();
     await loading.present();
-  
+
     try {
       let dataUrl = this.form.value.image;
       let imagePath = `${this.user.uid}/${Date.now()}`;
       let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
       this.form.controls.image.setValue(imageUrl);
-  
+
       const recipeData = this.form.value;
       delete recipeData.id;  // Remove id if it exists
-  
+
       const docRef = await this.firebaseSvc.addDocument(path, recipeData);
       console.log("Document written with ID: ", docRef.id);
-  
+
+      // Save the recipe globally as well
+      await this.firebaseSvc.addDocument(globalPath, { ...recipeData, id: docRef.id }); // Add to global recipes
+
       // Update the form with the new ID
       this.form.patchValue({ id: docRef.id });
-  
+
       this.utilsSvc.dismissModal({ success: true });
       this.utilsSvc.presentToast({
         message: 'Se ha creado con éxito',
@@ -104,7 +108,7 @@ export class AddUpdateRecipeComponent implements OnInit {
     let path = `users/${this.user.uid}/recipes/${this.recipe.id}`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
-  
+
     try {
       if (this.form.value.image !== this.recipe.image) {
         let dataUrl = this.form.value.image;
@@ -112,10 +116,10 @@ export class AddUpdateRecipeComponent implements OnInit {
         let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
         this.form.controls.image.setValue(imageUrl);
       }
-  
+
       const updatedRecipe = { ...this.form.value };
       delete updatedRecipe.id;
-  
+
       await this.firebaseSvc.updateDocument(path, updatedRecipe);
       this.utilsSvc.dismissModal({ success: true });
       this.utilsSvc.presentToast({

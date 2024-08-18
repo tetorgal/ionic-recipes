@@ -1,0 +1,36 @@
+<ion-content class="p-4 bg-white rounded-lg shadow-lg max-w-md mx-auto">
+  <app-header [isModal]="true" [title]="recipe.name"></app-header>
+  
+  <img 
+    [src]="recipe.image" 
+    alt="{{ recipe.name }}" 
+    class="w-full h-48 object-cover mb-4 rounded-lg shadow-sm" 
+  />
+
+  <div class="text-gray-700 space-y-4">
+    <div class="flex items-center">
+      <ion-icon name="information-circle-outline" class="mr-2 text-lg text-primary"></ion-icon>
+      <p class="text-sm"><strong>Descripción:</strong> {{ recipe.description }}</p>
+    </div>
+    
+    <div class="flex items-center">
+      <ion-icon name="nutrition-outline" class="mr-2 text-lg text-primary"></ion-icon>
+      <p class="text-sm"><strong>Ingredientes:</strong> {{ recipe.ingredients }}</p>
+    </div>
+    
+    <div class="flex items-center">
+      <ion-icon name="people-outline" class="mr-2 text-lg text-primary"></ion-icon>
+      <p class="text-sm"><strong>Porciones:</strong> {{ recipe.servings }}</p>
+    </div>
+    
+    <div class="flex items-center">
+      <ion-icon name="time-outline" class="mr-2 text-lg text-primary"></ion-icon>
+      <p class="text-sm"><strong>Tiempo:</strong> {{ recipe.time }} mins</p>
+    </div>
+    
+    <div class="flex items-center">
+      <ion-icon name="list-outline" class="mr-2 text-lg text-primary"></ion-icon>
+      <p class="text-sm"><strong>Pasos:</strong> {{ recipe.steps }}</p>
+    </div>
+  </div>
+</ion-content>

@@ -7,15 +7,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HomePage } from '../pages/main/home/home.page';
+import { RecipeDetailsModalComponent } from './components/recipe-details-modal/recipe-details-modal.component';
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent
+    HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent, RecipeDetailsModalComponent
   ],
   exports: [
-    HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent
+    HeaderComponent, LogoComponent, CustomInputComponent, AddUpdateRecipeComponent, RecipeDetailsModalComponent
   ],
   imports: [
     CommonModule,

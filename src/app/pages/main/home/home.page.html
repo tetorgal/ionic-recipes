@@ -1,64 +1,55 @@
-
 <ion-app>
   <app-header title="Inicio"></app-header>
   <ion-content [fullscreen]="true" class="ion-padding">
 
-    <!-- <div class="flex justify-end items-end">
-      <button (click)="signOut()"
-        class="bg-red-500 text-white font-semibold py-1 px-2 rounded hover:bg-red-700 flex items-center">
-        Salir
-        <ion-icon name="log-out" class="ml-2"></ion-icon>
-      </button>
-    </div> -->
 
     <!-- Search Bar -->
     <div class="w-full py-4">
-      <ion-searchbar placeholder="Search for recipes..." class="rounded-md"></ion-searchbar>
+      <ion-searchbar placeholder="Buscar recetas..." class="rounded-md"></ion-searchbar>
     </div>
 
     <!-- Categories (Chips) -->
     <div class="flex flex-wrap gap-2 mb-4 mx-2">
       <ion-chip color="tertiary">
-        <ion-label>Breakfast</ion-label>
+        <ion-label>Desayuno</ion-label>
       </ion-chip>
       <ion-chip color="tertiary" outline>
-        <ion-label>Lunch</ion-label>
+        <ion-label>Almuerzo</ion-label>
       </ion-chip>
       <ion-chip color="tertiary" outline>
-        <ion-label>Dinner</ion-label>
+        <ion-label>Cena</ion-label>
       </ion-chip>
       <ion-chip color="tertiary" outline>
-        <ion-label>Dessert</ion-label>
+        <ion-label>Postre</ion-label>
       </ion-chip>
     </div>
 
 
     <!-- Trending Recipes (Cards) -->
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <ion-card class="bg-white p-4 rounded shadow">
-        <img src="assets/logo-homechef.svg" alt="Image 1" class="w-full h-32 object-cover mb-2 rounded" />
-        <ion-card-header>
-          <ion-card-title class="text-xl font-semibold">Tonkotsu Ramen</ion-card-title>
-          <ion-card-subtitle class="text-gray-600">A flavorful broth with tender noodles...</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-button fill="outline" color="tertiary">Trending</ion-button>
-        </ion-card-content>
-      </ion-card>
+      <ng-container *ngFor="let recipe of recipes">
+        <ion-card class="bg-white p-4 rounded shadow">
+          <img [src]="recipe.image" alt="{{ recipe.name }}" class="w-full h-32 object-cover mb-2 rounded" />
+          <ion-card-header>
+            <ion-card-title class="text-xl font-semibold">{{ recipe.name }}</ion-card-title>
+            <ion-card-subtitle class="text-gray-600">{{ recipe.description }}</ion-card-subtitle>
+            <div class="text-right mt-3">
+              <ion-chip color="danger">
+                <ion-label>En tendencia</ion-label>
+              </ion-chip>
+            </div>
 
-      <ion-card class="bg-white p-4 rounded shadow">
-        <img src="assets/logo-homechef.svg" alt="Image 2" class="w-full h-32 object-cover mb-2 rounded" />
-        <ion-card-header>
-          <ion-card-title class="text-xl font-semibold">Margherita Pizza</ion-card-title>
-          <ion-card-subtitle class="text-gray-600">Classic pizza with a crispy crust...</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-button fill="outline" color="tertiary">Trending</ion-button>
-        </ion-card-content>
-      </ion-card>
-
-      <!-- Add more cards as needed -->
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button fill="outline" color="tertiary" (click)="openRecipeDetails(recipe)">Ver</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
     </section>
+
+
+
+
 
     <!-- Floating Action Button (FAB) -->
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
