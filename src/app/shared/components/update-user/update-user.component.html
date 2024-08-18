@@ -1,0 +1,62 @@
+<app-header [isModal]="true" title="Editar Usuario"></app-header>
+<ion-content>
+  <div>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+      (keypress.enter)="submit()"
+      class="flex gap-4 flex-col p-6 w-full bg-slate-50 rounded-lg shadow-md"
+    >
+      <!-- Nombre -->
+      <input
+        [formControl]="form.controls.name"
+        type="text"
+        placeholder="Nombre"
+        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300"
+      />
+
+      <div
+        *ngIf="form.controls.name.errors && form.controls.name.touched"
+        class="text-sm text-red-500 mt-1"
+      >
+        <div *ngIf="form.controls.name.errors?.['required']">
+          Este campo es requerido
+        </div>
+        <div *ngIf="form.controls.name.errors?.['minlength']">
+          Este campo debe contener al menos 4 caracteres
+        </div>
+      </div>
+
+      <!-- Correo -->
+      <input
+        [formControl]="form.controls.correo"
+        type="text"
+        placeholder="Correo"
+        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300"
+      />
+
+      <div
+        *ngIf="form.controls.correo.errors && form.controls.correo.touched"
+        class="text-sm text-red-500 mt-1"
+      >
+        <div *ngIf="form.controls.correo.errors?.['required']">
+          Este campo es requerido
+        </div>
+        <div *ngIf="form.controls.correo.errors?.['minlength']">
+          Este campo debe contener al menos 4 caracteres
+        </div>
+      </div>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        class="mt-4 text-slate-100 bg-violet-500 rounded-lg font-semibold"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Guardar Cambios
+        <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

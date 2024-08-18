@@ -1,23 +1,39 @@
-<ion-menu contentId="menu-content" menuId="menu-content" side="start" type="overlay">
-
-
+<ion-menu
+  contentId="menu-content"
+  menuId="menu-content"
+  side="start"
+  type="overlay"
+>
   <ion-content>
-
-
     <div class="flex justify-center items-center flex-col">
-      <ion-icon name="person-circle-outline" class="text-9xl" color="light"></ion-icon>
-      <h3 class="mt-2 font-semibold text-center text-white">{{ user()?.name }}</h3>
+      <img
+        [src]="user()?.image"
+        class="w-32 h-32 rounded-full"
+        *ngIf="user()?.image"
+      />
+      <ion-icon
+        name="person-circle-outline"
+        class="text-9xl"
+        color="light"
+        *ngIf="!user()?.image"
+      ></ion-icon>
+      <h3 class="mt-2 font-semibold text-center text-white">
+        {{ user()?.name }}
+      </h3>
     </div>
 
-
     <ion-menu-toggle autoHide="false" *ngFor="let p of pages">
-      <ion-item [ngClass]="{'active': currentPath === p.url}" [routerLink]="p.url" routerDirection="root" detail
-        lines="none">
+      <ion-item
+        [ngClass]="{'active': currentPath === p.url}"
+        [routerLink]="p.url"
+        routerDirection="root"
+        detail
+        lines="none"
+      >
         <ion-icon slot="start" [name]="p.icon"></ion-icon>
         <ion-label>{{p.title}}</ion-label>
       </ion-item>
     </ion-menu-toggle>
-
   </ion-content>
 
   <ion-footer class="ion-no-border safe-p-bottom">

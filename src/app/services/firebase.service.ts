@@ -14,7 +14,13 @@ import {
   updateDoc,
   deleteDoc
 } from '@angular/fire/firestore';
-import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import {
   getDownloadURL,
   getStorage,
@@ -34,15 +40,14 @@ export class FirebaseService {
 
   storage = inject(AngularFireStorage);
   utilsSvc = inject(UtilsService);
-  constructor() { }
-
-
+  constructor() {}
 
   // BASE DE DATOS
 
   getCollectionData(path: string, collectionQuery?: any) {
     const ref = collection(getFirestore(), path)
     return collectionData(query(ref, collectionQuery), { idField: 'id' })
+
   }
 
   // Obtener un documento
@@ -88,18 +93,17 @@ export class FirebaseService {
 
   //Acceder
   signIn(user: User) {
-    return signInWithEmailAndPassword(getAuth(), user.email, user.password)
-
+    return signInWithEmailAndPassword(getAuth(), user.email, user.password);
   }
 
   //Crear Usuario
   signUp(user: User) {
-    return createUserWithEmailAndPassword(getAuth(), user.email, user.password)
+    return createUserWithEmailAndPassword(getAuth(), user.email, user.password);
   }
 
   //Actualizar Uuario
   updateUser(displayName: string) {
-    return updateProfile(getAuth().currentUser, { displayName })
+    return updateProfile(getAuth().currentUser, { displayName });
   }
 
   //ENVIAR EMAIL PARA RESTABLECER CONTRASEÑA
@@ -119,3 +123,4 @@ export class FirebaseService {
   }
 
 }
+

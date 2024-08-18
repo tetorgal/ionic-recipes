@@ -99,7 +99,6 @@ export class AddUpdateRecipeComponent implements OnInit {
       loading.dismiss();
     }
   }
-
   async updateRecipe() {
     let path = `users/${this.user.uid}/recipes/${this.recipe.id}`;
     const loading = await this.utilsSvc.loading();

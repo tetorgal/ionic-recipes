@@ -1,10 +1,17 @@
 <ion-header class="ion-no-border">
-
   <div class="bg-violet-500 p-2 flex justify-center text-slate-200">
     <ion-buttons slot="start">
-      <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
-      <ion-button (click)="dismissModal()" *ngIf="isModal" class="text-white" color="light">
-        <span class="font-bold mt-1">x</span>
+      <ion-back-button
+        *ngIf="backButton"
+        [defaultHref]="backButton"
+      ></ion-back-button>
+      <ion-button (click)="dismissModal()" *ngIf="isModal">
+        <div
+          class="flex justify-center items-center w-full h-full bg-violet-500 text-slate-100 text-sm rounded-full font-bold"
+        >
+          x
+        </div>
+
       </ion-button>
     </ion-buttons>
 
