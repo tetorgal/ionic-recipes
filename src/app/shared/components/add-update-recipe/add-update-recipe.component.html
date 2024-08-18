@@ -1,12 +1,8 @@
 <app-header [isModal]="true" title="Agregar Receta"></app-header>
 <ion-content>
   <div>
-    <form
-      [formGroup]="form"
-      (ngSubmit)="submit()"
-      (keypress.enter)="submit()"
-      class="flex gap-4 flex-col p-6 w-full bg-slate-50 rounded-lg shadow-md"
-    >
+    <form [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()"
+      class="flex gap-4 flex-col p-6 w-full bg-slate-50 rounded-lg shadow-md">
       <div class="flex justify-center items-center w-full h-full">
         <ion-avatar *ngIf="form.value.image" class="w-32 h-32">
           <img [src]="form.value.image" class="rounded-full w-full h-full" />
@@ -14,34 +10,19 @@
       </div>
 
       <!-- Por si no existe foto -->
-      <ion-icon
-        *ngIf="!form.value.image"
-        name="image-outline"
-        class="text-violet-500 text-6xl text-center w-full"
-      ></ion-icon>
+      <ion-icon *ngIf="!form.value.image" name="image-outline"
+        class="text-violet-500 text-6xl text-center w-full"></ion-icon>
 
-      <ion-button
-        (click)="takeImage()"
-        expand="block"
-        fill="clear"
-        size="small"
-        class="mt-4 text-slate-100 bg-violet-500 rounded-lg p-2 font-semibold"
-      >
+      <ion-button (click)="takeImage()" expand="block" fill="clear" size="small"
+        class="mt-4 text-slate-100 bg-violet-500 rounded-lg p-2 font-semibold">
         Tomar/Seleccionar foto
       </ion-button>
 
       <!-- Nombre -->
-      <input
-        [formControl]="form.controls.name"
-        type="text"
-        placeholder="Nombre"
-        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300"
-      />
+      <input [formControl]="form.controls.name" type="text" placeholder="Nombre"
+        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300" />
 
-      <div
-        *ngIf="form.controls.name.errors && form.controls.name.touched"
-        class="text-sm text-red-500 mt-1"
-      >
+      <div *ngIf="form.controls.name.errors && form.controls.name.touched" class="text-sm text-red-500 mt-1">
         <div *ngIf="form.controls.name.errors?.['required']">
           Este campo es requerido
         </div>
@@ -51,18 +32,12 @@
       </div>
 
       <!-- Descripción -->
-      <textarea
-        [formControl]="form.controls.description"
-        placeholder="Descripción"
-        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300 h-32 resize-none"
-      ></textarea>
+      <textarea [formControl]="form.controls.description" placeholder="Descripción"
+        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300 h-32 resize-none"></textarea>
 
-      <div
-        *ngIf="
+      <div *ngIf="
           form.controls.description.errors && form.controls.description.touched
-        "
-        class="text-sm text-red-500 mt-1"
-      >
+        " class="text-sm text-red-500 mt-1">
         <div *ngIf="form.controls.description.errors?.['required']">
           Este campo es requerido
         </div>
@@ -72,18 +47,12 @@
       </div>
 
       <!-- Ingredientes -->
-      <textarea
-        [formControl]="form.controls.ingredients"
-        placeholder="Ingredientes"
-        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300 h-24 resize-none"
-      ></textarea>
+      <textarea [formControl]="form.controls.ingredients" placeholder="Ingredientes"
+        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300 h-24 resize-none"></textarea>
 
-      <div
-        *ngIf="
+      <div *ngIf="
           form.controls.ingredients.errors && form.controls.ingredients.touched
-        "
-        class="text-sm text-red-500 mt-1"
-      >
+        " class="text-sm text-red-500 mt-1">
         <div *ngIf="form.controls.ingredients.errors?.['required']">
           Este campo es requerido
         </div>
@@ -94,29 +63,18 @@
 
       <div class="flex gap-2">
         <!-- Porciones -->
-        <input
-          [formControl]="form.controls.servings"
-          type="text"
-          placeholder="Porciones"
-          class="w-1/2 p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300"
-        />
+        <input [formControl]="form.controls.servings" type="text" placeholder="Porciones"
+          class="w-1/2 p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300" />
 
         <!-- Tiempo -->
-        <input
-          [formControl]="form.controls.time"
-          type="text"
-          placeholder="Tiempo"
-          class="w-1/2 p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300"
-        />
+        <input [formControl]="form.controls.time" type="text" placeholder="Tiempo"
+          class="w-1/2 p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300" />
       </div>
 
       <div class="flex gap-2">
-        <div
-          *ngIf="
+        <div *ngIf="
             form.controls.servings.errors && form.controls.servings.touched
-          "
-          class="w-1/2 text-sm text-red-500 mt-1"
-        >
+          " class="w-1/2 text-sm text-red-500 mt-1">
           <div *ngIf="form.controls.servings.errors?.['required']">
             Este campo es requerido
           </div>
@@ -125,10 +83,7 @@
           </div>
         </div>
 
-        <div
-          *ngIf="form.controls.time.errors && form.controls.time.touched"
-          class="w-1/2 text-sm text-red-500 mt-1"
-        >
+        <div *ngIf="form.controls.time.errors && form.controls.time.touched" class="w-1/2 text-sm text-red-500 mt-1">
           <div *ngIf="form.controls.time.errors?.['required']">
             Este campo es requerido
           </div>
@@ -139,16 +94,10 @@
       </div>
 
       <!-- Pasos -->
-      <textarea
-        [formControl]="form.controls.steps"
-        placeholder="Pasos"
-        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300 h-32 resize-none"
-      ></textarea>
+      <textarea [formControl]="form.controls.steps" placeholder="Pasos"
+        class="w-full p-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 bg-slate-300 h-32 resize-none"></textarea>
 
-      <div
-        *ngIf="form.controls.steps.errors && form.controls.steps.touched"
-        class="text-sm text-red-500 mt-1"
-      >
+      <div *ngIf="form.controls.steps.errors && form.controls.steps.touched" class="text-sm text-red-500 mt-1">
         <div *ngIf="form.controls.steps.errors?.['required']">
           Este campo es requerido
         </div>
@@ -156,14 +105,10 @@
           Este campo debe contener al menos 4 caracteres
         </div>
       </div>
+      <input type="hidden" formControlName="id">
 
-      <ion-button
-        expand="block"
-        fill="clear"
-        class="mt-4 text-slate-100 bg-violet-500 rounded-lg p-3 font-semibold"
-        type="submit"
-        [disabled]="form.invalid"
-      >
+      <ion-button expand="block" fill="clear" class="mt-4 text-slate-100 bg-violet-500 rounded-lg p-3 font-semibold"
+        type="submit" [disabled]="form.invalid">
         Agregar Receta
         <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
       </ion-button>

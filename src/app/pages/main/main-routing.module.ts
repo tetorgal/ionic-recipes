@@ -12,13 +12,17 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
       },
-      // Resto de rutas para paginas
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
+        path: 'my-recipes',
+        loadChildren: () => import('./my-recipes/my-recipes.module').then(m => m.MyRecipesPageModule)
+      }
 
     ]
-  },  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  }
+  },
 
 
 

@@ -5,10 +5,14 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   addDoc,
   collection,
+  collectionData,
   doc,
   getDoc,
   getFirestore,
+  query,
   setDoc,
+  updateDoc,
+  deleteDoc
 } from '@angular/fire/firestore';
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import {
@@ -16,6 +20,7 @@ import {
   getStorage,
   ref,
   uploadString,
+  deleteObject
 } from 'firebase/storage';
 import { User } from '../models/user.model';
 import { UtilsService } from './utils.service';
@@ -34,21 +39,33 @@ export class FirebaseService {
 
 
   // BASE DE DATOS
-  //Setear un documento
-  setDocument(path: string, data: any) {
-    return setDoc(doc(getFirestore(), path), data);
-  }
 
+  getCollectionData(path: string, collectionQuery?: any) {
+    const ref = collection(getFirestore(), path)
+    return collectionData(query(ref, collectionQuery), { idField: 'id' })
+  }
 
   // Obtener un documento
   async getDocument(path: string) {
     return (await getDoc(doc(getFirestore(), path))).data();
   }
-
-  // Agregar un documento
   addDocument(path: string, data: any) {
-    return addDoc(collection(getFirestore(), path), data);
+    return addDoc(collection(getFirestore(), path), data)
   }
+  setDocument(path: string, data: any) {
+    return setDoc(doc(getFirestore(), path), data);
+  }
+  //Actualizar un documento
+  updateDocument(path: string, data: any) {
+    return updateDoc(doc(getFirestore(), path), data);
+  }
+  deleteDocument(path: string,) {
+    return deleteDoc(doc(getFirestore(), path))
+  }
+
+
+
+
 
   //Almacenamiento
 
@@ -59,6 +76,9 @@ export class FirebaseService {
         return getDownloadURL(ref(getStorage(), path));
       }
     );
+  }
+  async getFilePath(url: string) {
+    return ref(getStorage(), url).fullPath
   }
   //Auntentificación
 
@@ -93,6 +113,9 @@ export class FirebaseService {
     getAuth().signOut();
     localStorage.removeItem('user');
     this.utilsSvc.routerLink('/auth');
+  }
+  deleteFile(path: string) {
+    return deleteObject(ref(getStorage(), path))
   }
 
 }

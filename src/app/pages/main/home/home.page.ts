@@ -20,10 +20,14 @@ export class HomePage implements OnInit {
   ngOnInit() {
 
   }
-  addUpdateProduct() {
+  addUpdateRecipe() {
     this.utilSvc.presentModal({
       component: AddUpdateRecipeComponent,
     });
+  }
+
+  deleteRecipe(){
+    
   }
 
   //CERRAR SESIÓN

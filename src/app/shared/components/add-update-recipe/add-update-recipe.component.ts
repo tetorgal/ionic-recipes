@@ -1,5 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Recipe } from 'src/app/models/recipe.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -10,6 +11,9 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./add-update-recipe.component.scss'],
 })
 export class AddUpdateRecipeComponent implements OnInit {
+
+  @Input() recipe: Recipe
+
   form = new FormGroup({
     id: new FormControl(''),
     image: new FormControl('', [Validators.required]),
@@ -34,6 +38,11 @@ export class AddUpdateRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
+    if (this.recipe) {
+      console.log("Editing recipe:", this.recipe);
+      this.form.patchValue(this.recipe);
+    }
+    console.log("Form value after init:", this.form.value);
   }
 
   async takeImage() {
@@ -42,39 +51,91 @@ export class AddUpdateRecipeComponent implements OnInit {
     this.form.controls.image.setValue(dataUrl);
   }
 
-  async submit() {
-    if (this.form.valid) {
-      let path = `users/${this.user.uid}/recipies`;
+  submit() {
+    if(this.form.value){
+      if(this.recipe) this.updateRecipe();
+      else this.createRecipe();
+    }
 
-      const loading = await this.utilsSvc.loading();
-      await loading.present();
-
-      // Subir la imagen y obtener URL
+  }
+  async createRecipe() {
+    let path = `users/${this.user.uid}/recipes`;
+    const loading = await this.utilsSvc.loading();
+    await loading.present();
+  
+    try {
       let dataUrl = this.form.value.image;
       let imagePath = `${this.user.uid}/${Date.now()}`;
       let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
       this.form.controls.image.setValue(imageUrl);
+  
+      const recipeData = this.form.value;
+      delete recipeData.id;  // Remove id if it exists
+  
+      const docRef = await this.firebaseSvc.addDocument(path, recipeData);
+      console.log("Document written with ID: ", docRef.id);
+  
+      // Update the form with the new ID
+      this.form.patchValue({ id: docRef.id });
+  
+      this.utilsSvc.dismissModal({ success: true });
+      this.utilsSvc.presentToast({
+        message: 'Se ha creado con éxito',
+        duration: 1500,
+        color: 'success',
+        position: 'middle',
+        icon: 'checkmark-circle-outline'
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      this.utilsSvc.presentToast({
+        message: error.message,
+        duration: 2500,
+        color: 'primary',
+        position: 'middle',
+        icon: 'alert-circle-outline'
+      });
+    } finally {
+      loading.dismiss();
+    }
+  }
 
-      delete this.form.value.id;
-
-      this.firebaseSvc
-        .addDocument(path, this.form.value as User)
-        .then(async (res) => {
-          this.utilsSvc.dismissModal({ success: true });
-          this.utilsSvc.presentToast({
-            message: 'Receta creada correctamente',
-            duration: 1500,
-            color: 'success',
-            position: 'middle',
-            icon: 'checkmark-circle-outline',
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          loading.dismiss();
-        });
+  async updateRecipe() {
+    let path = `users/${this.user.uid}/recipes/${this.recipe.id}`;
+    const loading = await this.utilsSvc.loading();
+    await loading.present();
+  
+    try {
+      if (this.form.value.image !== this.recipe.image) {
+        let dataUrl = this.form.value.image;
+        let imagePath = await this.firebaseSvc.getFilePath(this.recipe.image);
+        let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
+        this.form.controls.image.setValue(imageUrl);
+      }
+  
+      const updatedRecipe = { ...this.form.value };
+      delete updatedRecipe.id;
+  
+      await this.firebaseSvc.updateDocument(path, updatedRecipe);
+      this.utilsSvc.dismissModal({ success: true });
+      this.utilsSvc.presentToast({
+        message: 'Se ha actualizado con éxito',
+        duration: 1500,
+        color: 'success',
+        position: 'middle',
+        icon: 'checkmark-circle-outline'
+      });
+    } catch (error) {
+      console.log(error);
+      this.utilsSvc.presentToast({
+        message: error.message,
+        duration: 2500,
+        color: 'primary',
+        position: 'middle',
+        icon: 'alert-circle-outline'
+      });
+    } finally {
+      loading.dismiss();
     }
   }
 }
