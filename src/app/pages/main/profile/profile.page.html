@@ -1,13 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="flex justify-center items-center p-2 flex-col">
+    <ion-avatar class="w-32 h-32">
+      <img
+        [src]="user()?.image"
+        class="rounded-full w-full h-full"
+        *ngIf="user()?.image"
+      />
+
+      <ion-icon
+        *ngIf="!user()?.image"
+        name="person-circle-outline"
+        class="rounded-full w-full h-full text-gray-400"
+      ></ion-icon>
+    </ion-avatar>
+    <ion-button
+      (click)="takeImage()"
+      shape="round"
+      class="relative bottom-8 bg-violet-500 rounded-3xl text-slate-100 font-bold"
+      fill="clear"
+      expand="block"
+    >
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <h2 class="text-center text-2xl font-bold">{{user().name}}</h2>
+
+  <ion-item button detail (click)="updateUser()">
+    <ion-icon
+      slot="start"
+      name="person-outline"
+      class="text-violet-500"
+    ></ion-icon>
+    <ion-label>Editar perfil</ion-label>
+  </ion-item>
 </ion-content>

@@ -1,5 +1,4 @@
 <ion-header class="ion-no-border">
-
   <div class="bg-violet-500 p-2 flex justify-center text-slate-200">
     <!-- <ion-toolbar> -->
 
@@ -9,7 +8,11 @@
         [defaultHref]="backButton"
       ></ion-back-button>
       <ion-button (click)="dismissModal()" *ngIf="isModal">
-        <ion-icon name="close-circle-outlined"></ion-icon>
+        <div
+          class="flex justify-center items-center w-full h-full bg-violet-500 text-slate-100 text-sm rounded-full font-bold"
+        >
+          x
+        </div>
       </ion-button>
     </ion-buttons>
 
